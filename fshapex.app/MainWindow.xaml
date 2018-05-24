@@ -1,0 +1,176 @@
+﻿<Controls:MetroWindow 
+    x:Class="fshapex.app.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:Controls="http://metro.mahapps.com/winfx/xaml/controls"
+    xmlns:iconPacks="http://metro.mahapps.com/winfx/xaml/iconpacks"
+    xmlns:cam="clr-namespace:WebcamControl;assembly=WebcamControl"
+    xmlns:local="clr-namespace:fshapex.app"
+    mc:Ignorable="d"
+    
+    TitleCharacterCasing="Normal"
+    GlowBrush="{DynamicResource AccentColorBrush}"
+    WindowStartupLocation="CenterScreen"
+    Title="FShapeX" Width="800" Height="600" ResizeMode="CanMinimize"
+    
+    Activated="MetroWindow_Activated" 
+    Deactivated="MetroWindow_Deactivated" 
+    Closing="MetroWindow_Closing">
+
+    <!--<Controls:MetroWindow.RightWindowCommands>
+        <Controls:WindowCommands>
+            <Button Click="ChangeAppStyleButtonClick">
+                <StackPanel Orientation="Horizontal">
+                    <iconPacks:PackIconMaterial Width="24" Height="24" Kind="AccessPoint" />
+                    <TextBlock Margin="4 0 0 0" VerticalAlignment="Center" Text="Change App Style..." />
+                </StackPanel>
+            </Button>
+        </Controls:WindowCommands>
+    </Controls:MetroWindow.RightWindowCommands>-->
+
+    <Grid Name="grd" Background="{DynamicResource AccentColorBrush}">
+        <TabControl HorizontalAlignment="Stretch" VerticalAlignment="Stretch" TabStripPlacement="Left" Background="Transparent">
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="8 8 8 4" Cursor="Hand">
+                        <iconPacks:PackIconMaterial Width="36" Height="36" Kind="Image" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Single" Foreground="White"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="White">
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="{DynamicResource AccentColorBrush}">
+                        <TextBlock TextWrapping="Wrap" Text="Load a image" FontSize="16" Name="lblImage"/>
+                    </Border>
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Margin="10,40,0,10" Width="400">
+                        <!--<cam:Webcam Name="webcamViewer" FrameRate="30" ImageDirectory="Assets/Images"/>-->
+                        <Image Name="imgSourceSingle" Stretch="Uniform" />
+                    </Border>
+                    <Button Content="Load" Margin="426,40,0,0" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top" Name="btnLoad" Click="btnLoad_Click"/>
+                    <Button Content="Clear" Margin="523,40,0,0" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Name="btnClear" Click="btnClear_Click"/>
+                    <Button Content="Start" Margin="620,40,0,0" Width="92" HorizontalAlignment="Left" VerticalAlignment="Top" IsEnabled="False" Name="btnStart" Click="btnStart_Click"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="426,241,0,0" TextWrapping="Wrap" Text="This image was classificated in cluster:" FontSize="16"/>
+                    <TextBlock HorizontalAlignment="Left" VerticalAlignment="Top" Margin="700,235,0,0" TextWrapping="Wrap" Text="0" FontSize="22" Name="lblCluster"/>
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Margin="426,269,0,10" Width="286">
+                        <Image Name="imgGraph" Stretch="Uniform" />
+                    </Border>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="8 4 8 4" Cursor="Hand">
+                        <iconPacks:PackIconMaterial Width="36" Height="36" Kind="ImageMultiple" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Multi" Foreground="White"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="White">
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="{DynamicResource AccentColorBrush}">
+                        <TextBlock TextWrapping="Wrap" Text="Process multiple datasets and generate a new dataset." FontSize="16"/>
+                    </Border>
+                    <Label Content="Input folder:" Margin="10,60,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <Button Content="Process" Margin="0,59,10,0" Width="95" HorizontalAlignment="Right" VerticalAlignment="Top" Name="btnProcess" Click="btnProcess_Click"/>
+                    <TextBox VerticalAlignment="Top" Height="23" Margin="10,91,10,0" TextWrapping="Wrap" Name="txtInput"/>
+                    <Label Content="Output folder:" Margin="10,122,0,0" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                    <TextBox VerticalAlignment="Top" Height="23" Margin="10,153,10,0" TextWrapping="Wrap" Name="txtOutput"/>
+                    <Grid HorizontalAlignment="Stretch" Margin="10,184,10,31" Visibility="Visible">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1*" />
+                            <ColumnDefinition Width="1*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="0">
+                            <Label Content="Info:" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <TextBox Name="textBoxInfo" Margin="0,31,8,0" TextWrapping="Wrap" AcceptsReturn="True"/>
+                        </Grid>
+                        <Grid HorizontalAlignment="Stretch" VerticalAlignment="Stretch" Grid.Column="1">
+                            <Label Content="Image:" VerticalAlignment="Top" HorizontalAlignment="Left"/>
+                            <Border HorizontalAlignment="Stretch" VerticalAlignment="Stretch" BorderThickness="1" BorderBrush="{DynamicResource AccentColorBrush}" Margin="8,31,0,0">
+                                <Image Name="imgSourceMulti" Stretch="Uniform"/>
+                            </Border>
+                        </Grid>
+                    </Grid>
+                    <StatusBar Height="26" VerticalAlignment="Bottom">
+                        <StatusBarItem>
+                            <TextBlock Margin="10,0,0,0" Name="lblStatusBar"/>
+                        </StatusBarItem>
+                    </StatusBar>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="8 4 8 4" Cursor="Hand">
+                        <iconPacks:PackIconMaterial Width="36" Height="36" Kind="Settings" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="Config" Foreground="White"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="White">
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="10,10,0,0" BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="{DynamicResource AccentColorBrush}">
+                        <TextBlock TextWrapping="Wrap" Text="Configurations" FontSize="16"/>
+                    </Border>
+                    <CheckBox Content="Change the DPI of the image" HorizontalAlignment="Left" Margin="10,60,0,0" VerticalAlignment="Top" IsChecked="True" Checked="chkDpi_Checked" Unchecked="chkDpi_Unchecked" Name="chkDpi"/>
+                    <Slider Margin="10,89,0,0" VerticalContentAlignment="Center" HorizontalContentAlignment="Center" VerticalAlignment="Top" Maximum="300" Minimum="1" Value="96" Style="{DynamicResource FlatSlider}" ValueChanged="sldDpi_ValueChanged" SmallChange="1" Name="sldDpi" HorizontalAlignment="Left" Width="177"/>
+                    <Label Content="96" Margin="192,81,0,0" VerticalAlignment="Top" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" Name="lblDpi" HorizontalAlignment="Left" Width="35"/>
+                    <Label Content="API of detection:" Margin="10,130,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177"/>
+                    <RadioButton Content="Microsoft Cognitive Services" HorizontalAlignment="Left" Margin="24,161,0,0" VerticalAlignment="Top" GroupName="api" Name="rdoCognitiveServices"/>
+                    <RadioButton Content="Face++" HorizontalAlignment="Left" Margin="24,184,0,0" VerticalAlignment="Top" GroupName="api" IsChecked="True" Name="rdoFacePlusPlus"/>
+                    <RadioButton Content="Kairos" HorizontalAlignment="Left" Margin="24,207,0,0" VerticalAlignment="Top" GroupName="api" Name="rdoKairos"/>
+                    <Label Content="Number of clusters:" Margin="10,248,0,0" VerticalAlignment="Top" HorizontalAlignment="Left" Width="177"/>
+                    <RadioButton Content="4" HorizontalAlignment="Left" Margin="24,279,0,0" VerticalAlignment="Top" GroupName="kclusters" IsChecked="True" Name="rdoK4"/>
+                    <RadioButton Content="5" HorizontalAlignment="Left" Margin="64,279,0,0" VerticalAlignment="Top" GroupName="kclusters" Name="rdoK5"/>
+                    <RadioButton Content="6" HorizontalAlignment="Left" Margin="104,279,0,0" VerticalAlignment="Top" GroupName="kclusters" Name="rdoK6"/>
+                    <RadioButton Content="7" HorizontalAlignment="Left" Margin="144,279,0,0" VerticalAlignment="Top" GroupName="kclusters" Name="rdoK7"/>
+                </Grid>
+            </TabItem>
+            <TabItem>
+                <TabItem.Header>
+                    <StackPanel Orientation="Vertical" Margin="8 4 8 8" Cursor="Hand">
+                        <iconPacks:PackIconMaterial Width="36" Height="36" Kind="Information" HorizontalAlignment="Center" Foreground="White"/>
+                        <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" Text="About" Foreground="White"/>
+                    </StackPanel>
+                </TabItem.Header>
+                <Grid Background="White">
+                    <Border HorizontalAlignment="Left" VerticalAlignment="Top" Margin="189,71,0,0" BorderThickness="0,0,0,2" Padding="0,0,0,2" BorderBrush="{DynamicResource AccentColorBrush}">
+                        <TextBlock TextWrapping="Wrap" Text="FShapeX v1" FontSize="28"/>
+                    </Border>
+                    <Image HorizontalAlignment="Left" Margin="10,13,0,0" VerticalAlignment="Top" Source="Assets/Images/Speech-Bubble-PNG-Images.png" Height="461" Width="515"/>
+                    <Image HorizontalAlignment="Left" Height="256" Margin="456,299,0,0" VerticalAlignment="Top" Width="256" Source="Assets/Images/leopard-emoji-vector-icon.png"/>
+                    <TextBlock Margin="72,130,0,0" TextWrapping="Wrap" Text="This software it is result from the project of master degree of the student:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBlock Margin="92,151,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Padding="0,4,0,0">
+                        Vinicius Picossi Teruel 
+                        <Hyperlink NavigateUri="mailto:viniciuspicossi@gmail.com" Click="btnCopyMail1_Click">viniciuspicossi@gmail.com</Hyperlink>
+                    </TextBlock>
+                    <Button HorizontalAlignment="Left" Margin="355,151,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" Cursor="Hand" Name="btnCopyMail1" Click="btnCopyMail1_Click">
+                        <iconPacks:PackIconMaterial Width="12" Height="12" Kind="ContentCopy" HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock HorizontalAlignment="Left" Margin="384,151,0,0" TextWrapping="Wrap" Text="copied" VerticalAlignment="Top" Height="26" Padding="0,4,0,0" Visibility="Hidden" Name="lblCopyMail1"/>
+                    <TextBlock Margin="72,182,0,0" TextWrapping="Wrap" Text="With orientations of the teachers:" HorizontalAlignment="Left" VerticalAlignment="Top"/>
+                    <TextBlock Margin="92,203,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Padding="0,4,0,0">
+                        Alexandre Rossi Paschoal 
+                        <Hyperlink NavigateUri="mailto:paschoal@utfpr.edu.br" Click="btnCopyMail2_Click">paschoal@utfpr.edu.br</Hyperlink>
+                    </TextBlock>
+                    <Button HorizontalAlignment="Left" Margin="353,203,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" Cursor="Hand" Name="btnCopyMail2" Click="btnCopyMail2_Click">
+                        <iconPacks:PackIconMaterial Width="12" Height="12" Kind="ContentCopy" HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock HorizontalAlignment="Left" Margin="382,203,0,0" TextWrapping="Wrap" Text="copied" VerticalAlignment="Top" Height="26" Padding="0,4,0,0" Visibility="Hidden" Name="lblCopyMail2"/>
+                    <TextBlock Margin="92,234,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Padding="0,4,0,0">
+                        Pedro Henrique Bugatti 
+                        <Hyperlink NavigateUri="mailto:pbugatti@utfpr.edu.br" Click="btnCopyMail3_Click">pbugatti@utfpr.edu.br</Hyperlink>
+                    </TextBlock>
+                    <Button HorizontalAlignment="Left" Margin="343,234,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" Cursor="Hand" Name="btnCopyMail3" Click="btnCopyMail3_Click">
+                        <iconPacks:PackIconMaterial Width="12" Height="12" Kind="ContentCopy" HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock HorizontalAlignment="Left" Margin="372,234,0,0" TextWrapping="Wrap" Text="copied" VerticalAlignment="Top" Height="26" Padding="0,4,0,0" Visibility="Hidden" Name="lblCopyMail3"/>
+                    <TextBlock Margin="92,265,0,0" TextWrapping="Wrap" HorizontalAlignment="Left" VerticalAlignment="Top" Height="26" Padding="0,4,0,0">
+                        Priscila Tiemi Maeda Saito 
+                        <Hyperlink NavigateUri="mailto:psaito@utfpr.edu.br" Click="btnCopyMail4_Click">psaito@utfpr.edu.br</Hyperlink>
+                    </TextBlock>
+                    <Button HorizontalAlignment="Left" Margin="344,265,0,0" VerticalAlignment="Top" Background="{x:Null}" BorderBrush="{x:Null}" Focusable="False" Cursor="Hand" Name="btnCopyMail4" Click="btnCopyMail4_Click">
+                        <iconPacks:PackIconMaterial Width="12" Height="12" Kind="ContentCopy" HorizontalAlignment="Center"/>
+                    </Button>
+                    <TextBlock HorizontalAlignment="Left" Margin="373,265,0,0" TextWrapping="Wrap" Text="copied" VerticalAlignment="Top" Height="26" Padding="0,4,0,0" Visibility="Hidden" Name="lblCopyMail4"/>
+                </Grid>
+            </TabItem>
+        </TabControl>
+        <!--<Button Width="32" Height="32" Content="{iconPacks:Material Kind=Mouse, Spin=True}"/>-->
+    </Grid>
+</Controls:MetroWindow>
